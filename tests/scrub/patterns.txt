@@ -1,0 +1,21 @@
+# Public red-flag patterns (case-insensitive). One regex per line.
+\blesson\s*#?\d+
+\bchapter\s*#?\d+
+\bch\.?\s*\d+\b
+\bcourse\b
+\bcourses\b
+\budemy\b
+\bisbn\b
+\btutorial\s+by\b
+\bas\s+taught\b
+\binstructor\b
+C:\\Users\\
+\\Users\\[A-Za-z]
+/workspace/
+/home/[a-z]+/
+/Users/[A-Za-z]+/
+\.(epub|srt|vtt)\b
+\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b
+[A-Za-z0-9._%+-]+@(gmail|outlook|hotmail|yahoo|proton)\.
+\bsk-[A-Za-z0-9]{20,}
+\bghp_[A-Za-z0-9]{20,}

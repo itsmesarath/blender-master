@@ -1,0 +1,1 @@
+A procedural city block for a previs shot: a 3 x 3 grid of buildings with random heights driven by geometry nodes, a two-lane street with sidewalks along one side, a row of street lamps, a small park with scattered trees, gentle hills in the distance, late-afternoon sun, one high wide establishing render. Changing the seed should give a new skyline.

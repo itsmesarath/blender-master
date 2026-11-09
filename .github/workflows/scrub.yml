@@ -1,0 +1,29 @@
+name: scrub
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Reference, path and secret scan
+        run: python tools/scrub_scan.py
+
+      - name: Blender 5.x API lint
+        run: python blender-master/subskills/scripting-automation/scripts/api_lint.py blender-master tests
+
+      - name: Live chunk template lint
+        run: python blender-master/subskills/live-control-mcp/scripts/lint_chunks.py

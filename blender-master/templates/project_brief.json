@@ -1,0 +1,47 @@
+{
+  "schema": "blender-master/brief@1",
+  "project": "my-project",
+  "request": "<the user's request, verbatim>",
+  "type": {"primary": "hard_surface_prop", "modifiers": [], "scores": {}},
+  "deliverables": [{"kind": "still", "res": [1920, 1080], "cameras": ["CAM_hero"]}],
+  "units": "metric_m",
+  "style": {"look": "<short description>"},
+  "budget": {"tris": null, "render_minutes_per_frame": 5},
+  "facts": {
+    "subject_prefix": "GEO_subject_",
+    "subject_size": [0.5, 0.5, 0.5],
+    "hero_camera": "CAM_hero",
+    "cameras": ["CAM_hero"],
+    "resolution": [1920, 1080]
+  },
+  "assumptions": [],
+  "questions": [],
+  "execution_mode": "headless",
+  "parts": [
+    {
+      "id": "P01-blockout", "role": "blockout", "subskill": "blockout-spatial-brief",
+      "depends_on": [], "mode": "headless", "goal": "real-scale proxies and the hero camera",
+      "ops": [
+        {"op": "setup_scene", "args": {}},
+        {"op": "proxy", "args": {"name": "PRX_subject", "size": [0.5, 0.5, 0.5], "note": "main object"}},
+        {"op": "camera", "args": {"name": "CAM_hero", "view": "three_quarter", "lens": 50, "objects": ["PRX_subject"]}},
+        {"op": "write_spatial_brief", "args": {}}
+      ],
+      "acceptance": [
+        {"check": "objects_exist", "args": {"prefix": "PRX_"}, "desc": "proxies exist"},
+        {"check": "cameras_exist", "args": {"names": ["CAM_hero"]}, "desc": "hero camera exists"}
+      ],
+      "preview": {"cameras": ["CAM_hero"], "samples": 8, "res": [480, 270]}
+    },
+    {
+      "id": "P02-model", "role": "model", "subskill": "modeling-topology",
+      "depends_on": ["P01-blockout"], "mode": "headless", "goal": "<what the geometry must be>",
+      "ops": [{"op": "from_proxy", "args": {"proxy": "PRX_subject", "name": "GEO_subject_body"}}],
+      "acceptance": [
+        {"check": "bounds_size", "args": {"objects": "GEO_subject_", "target": [0.5, 0.5, 0.5], "tol": 0.05}, "desc": "matches brief size"},
+        {"check": "on_ground", "args": {"objects": "GEO_subject_"}, "desc": "sits on the ground"}
+      ],
+      "preview": {"cameras": ["CAM_hero"], "samples": 8, "res": [480, 270], "contact_sheet": true}
+    }
+  ]
+}

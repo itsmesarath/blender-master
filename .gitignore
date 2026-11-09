@@ -1,0 +1,13 @@
+# build and test output (renders, versioned .blend files, reports)
+out/
+tests/_output/
+*.blend
+*.blend1
+*.blend@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.DS_Store
+Thumbs.db

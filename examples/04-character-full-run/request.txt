@@ -1,0 +1,1 @@
+A friendly stylized explorer character for a game: A-pose body sculpted and baked down to a clean low-poly mesh, short dark hair, a simple face rig (jaw, smile, brows), a body rig with IK, a short waving-hello animation, one hero render and an FBX for Unreal.

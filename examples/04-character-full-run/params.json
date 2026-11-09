@@ -1,0 +1,1167 @@
+{
+  "project": "explorer-character",
+  "type_override": {
+    "primary": "character",
+    "modifiers": [],
+    "ambiguous": false
+  },
+  "facts": {
+    "subject_prefix": "GEO_char_body",
+    "subject_proxy": "PRX_char",
+    "subject_size": [
+      1.594,
+      0.238,
+      1.8
+    ],
+    "min_quad_ratio": 0.95,
+    "tri_budget": 8000,
+    "hero_camera": "CAM_hero",
+    "cameras": [
+      "CAM_hero"
+    ],
+    "resolution": [
+      768,
+      960
+    ],
+    "frame_objects": [
+      "GEO_char_body"
+    ],
+    "min_fill": 0.3,
+    "sculpt_target": "GEO_char_body_high",
+    "sculpt_min_verts": 30000,
+    "retopo_low": "GEO_char_body",
+    "retopo_high": "GEO_char_body_high",
+    "retopo_max_mean": 0.003,
+    "hair_prefix": "GEO_char_hair",
+    "min_curves": 4000,
+    "face_mesh": "GEO_char_body",
+    "skin_mesh": "GEO_char_body",
+    "animated": [
+      "RIG_char"
+    ],
+    "exposure": {
+      "max_clipped": 0.04,
+      "mean_max": 0.5
+    },
+    "closed_meshes": true
+  },
+  "assumptions": [
+    "type fixed to character (the request also reads as a game asset); stylized means proportions and colour here, so no toon-shading part",
+    "1.8 m stylized adult proportions (about 7.5 heads), A-pose, facing -Y, feet on z = 0",
+    "base mesh from a joint skeleton (Skin modifier); the sculpt is a subdivided copy with surface detail, so retopology fits the clean base back onto it",
+    "clothing is material zones on the body mesh (shirt, trousers, boots), not separate garments",
+    "face rig uses shape keys driven by four control empties; eyes are separate spheres parented to the head bone",
+    "animation: 48 frames at 24 fps, wave hello with the right arm, small head tilt, breathing, a spoken 'hi' on the jaw",
+    "arms are FK for the wave; legs get IK so the feet stay planted"
+  ],
+  "roles": {
+    "blockout": {
+      "ops": [
+        {
+          "op": "setup_scene",
+          "args": {
+            "frame_range": [
+              1,
+              48
+            ]
+          }
+        },
+        {
+          "op": "resolution",
+          "args": {
+            "res": [
+              768,
+              960
+            ]
+          }
+        },
+        {
+          "op": "proxy",
+          "args": {
+            "name": "PRX_char",
+            "shape": "box",
+            "size": [
+              1.594,
+              0.238,
+              1.8
+            ],
+            "note": "A-pose figure incl. arm span"
+          }
+        },
+        {
+          "op": "ground",
+          "args": {
+            "size": [
+              6,
+              6
+            ]
+          }
+        },
+        {
+          "op": "camera",
+          "args": {
+            "name": "CAM_hero",
+            "lens": 50,
+            "view": "three_quarter",
+            "objects": "PRX_char",
+            "fill": 0.7
+          }
+        },
+        {
+          "op": "write_spatial_brief"
+        }
+      ]
+    },
+    "model": {
+      "ops": [
+        {
+          "op": "skin_figure",
+          "args": {
+            "name": "GEO_char_body",
+            "height": 1.8,
+            "arm_angle": 40,
+            "subdiv": 2
+          }
+        },
+        {
+          "op": "sphere",
+          "args": {
+            "name": "GEO_char_eye_L",
+            "radius": 0.018,
+            "location": [
+              0.035,
+              -0.095,
+              1.697
+            ]
+          }
+        },
+        {
+          "op": "sphere",
+          "args": {
+            "name": "GEO_char_eye_R",
+            "radius": 0.018,
+            "location": [
+              -0.035,
+              -0.095,
+              1.697
+            ]
+          }
+        },
+        {
+          "op": "box",
+          "args": {
+            "name": "GEO_floor",
+            "size": [
+              6,
+              6,
+              0.02
+            ],
+            "location": [
+              0,
+              0,
+              -0.02
+            ]
+          }
+        },
+        {
+          "op": "hide_proxies"
+        }
+      ]
+    },
+    "sculpt": {
+      "ops": [
+        {
+          "op": "make_high",
+          "args": {
+            "source": "GEO_char_body",
+            "levels": 2
+          }
+        },
+        {
+          "op": "inflate",
+          "args": {
+            "target": "GEO_char_body_high",
+            "center": [
+              0.06,
+              -0.1,
+              1.36
+            ],
+            "radius": 0.09,
+            "amount": 0.008
+          }
+        },
+        {
+          "op": "inflate",
+          "args": {
+            "target": "GEO_char_body_high",
+            "center": [
+              0.045,
+              -0.09,
+              1.66
+            ],
+            "radius": 0.03,
+            "amount": 0.004
+          }
+        },
+        {
+          "op": "grab",
+          "args": {
+            "target": "GEO_char_body_high",
+            "center": [
+              0.0,
+              -0.11,
+              1.68
+            ],
+            "radius": 0.02,
+            "offset": [
+              0,
+              -0.008,
+              0
+            ]
+          }
+        },
+        {
+          "op": "crease",
+          "args": {
+            "target": "GEO_char_body_high",
+            "points": [
+              [
+                0.0,
+                -0.12,
+                1.43
+              ],
+              [
+                0.0,
+                -0.12,
+                1.25
+              ]
+            ],
+            "radius": 0.012,
+            "depth": 0.003,
+            "mirror_x": false
+          }
+        },
+        {
+          "op": "surface_noise",
+          "args": {
+            "target": "GEO_char_body_high",
+            "strength": 0.002,
+            "scale": 45
+          }
+        },
+        {
+          "op": "smooth",
+          "args": {
+            "target": "GEO_char_body_high",
+            "iterations": 1,
+            "factor": 0.2
+          }
+        }
+      ],
+      "acceptance_extra": [
+        {
+          "check": "symmetry_ok",
+          "args": {
+            "objects": [
+              "GEO_char_body_high"
+            ],
+            "tol": 0.004
+          },
+          "desc": "sculpt stays symmetric"
+        }
+      ]
+    },
+    "retopo": {
+      "ops": [
+        {
+          "op": "shrinkwrap_fit",
+          "args": {
+            "low": "GEO_char_body",
+            "high": "GEO_char_body_high",
+            "smooth_iterations": 0
+          }
+        }
+      ]
+    },
+    "uv": {
+      "ops": [
+        {
+          "op": "unwrap",
+          "args": {
+            "targets": [
+              "GEO_char_body"
+            ],
+            "method": "smart",
+            "angle": 60,
+            "margin": 0.004
+          }
+        },
+        {
+          "op": "unwrap",
+          "args": {
+            "targets": [
+              "GEO_char_eye_L",
+              "GEO_char_eye_R"
+            ],
+            "method": "smart"
+          }
+        },
+        {
+          "op": "texel_report",
+          "args": {
+            "targets": [
+              "GEO_char_body"
+            ],
+            "tex": 1024
+          }
+        }
+      ],
+      "acceptance_extra": [
+        {
+          "check": "uv_no_overlap",
+          "args": {
+            "objects": [
+              "GEO_char_body"
+            ]
+          },
+          "desc": "no overlapping islands (unique bake layout)"
+        }
+      ]
+    },
+    "bake": {
+      "ops": [
+        {
+          "op": "bake",
+          "args": {
+            "target": "GEO_char_body",
+            "maps": [
+              "normal",
+              "ao"
+            ],
+            "size": 1024,
+            "high": "GEO_char_body_high",
+            "extrusion": 0.01,
+            "samples": 16,
+            "wire": false
+          }
+        }
+      ]
+    },
+    "materials": {
+      "ops": [
+        {
+          "op": "material",
+          "args": {
+            "name": "char_skin",
+            "preset": "skin_basic",
+            "color": [
+              0.72,
+              0.5,
+              0.38
+            ]
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "char_shirt",
+            "preset": "fabric",
+            "color": [
+              0.04,
+              0.18,
+              0.38
+            ]
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "char_trousers",
+            "preset": "fabric",
+            "color": [
+              0.14,
+              0.1,
+              0.06
+            ]
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "char_boots",
+            "preset": "rubber",
+            "color": [
+              0.05,
+              0.03,
+              0.02
+            ],
+            "overrides": {
+              "Roughness": 0.6
+            }
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "char_eye",
+            "preset": "ceramic",
+            "color": [
+              0.9,
+              0.9,
+              0.88
+            ]
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "char_iris",
+            "preset": "plastic_gloss",
+            "color": [
+              0.04,
+              0.025,
+              0.015
+            ],
+            "overrides": {
+              "Coat Weight": 0.8
+            }
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "floor",
+            "preset": "plaster",
+            "color": [
+              0.25,
+              0.24,
+              0.23
+            ]
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "char_skin",
+            "targets": [
+              "GEO_char_body"
+            ]
+          }
+        },
+        {
+          "op": "assign_box",
+          "args": {
+            "target": "GEO_char_body",
+            "material": "char_shirt",
+            "box_min": [
+              -0.33,
+              -1,
+              0.9
+            ],
+            "box_max": [
+              0.33,
+              1,
+              1.56
+            ]
+          }
+        },
+        {
+          "op": "assign_box",
+          "args": {
+            "target": "GEO_char_body",
+            "material": "char_trousers",
+            "box_min": [
+              -0.3,
+              -1,
+              0.1
+            ],
+            "box_max": [
+              0.3,
+              1,
+              0.9
+            ]
+          }
+        },
+        {
+          "op": "assign_box",
+          "args": {
+            "target": "GEO_char_body",
+            "material": "char_boots",
+            "box_min": [
+              -0.3,
+              -1,
+              -0.1
+            ],
+            "box_max": [
+              0.3,
+              1,
+              0.1
+            ]
+          }
+        },
+        {
+          "op": "use_textures",
+          "args": {
+            "material": "char_skin",
+            "textures": {
+              "normal": "textures/GEO_char_body_normal.png",
+              "ao": "textures/GEO_char_body_ao.png"
+            }
+          }
+        },
+        {
+          "op": "use_textures",
+          "args": {
+            "material": "char_shirt",
+            "textures": {
+              "normal": "textures/GEO_char_body_normal.png",
+              "ao": "textures/GEO_char_body_ao.png"
+            }
+          }
+        },
+        {
+          "op": "use_textures",
+          "args": {
+            "material": "char_trousers",
+            "textures": {
+              "normal": "textures/GEO_char_body_normal.png",
+              "ao": "textures/GEO_char_body_ao.png"
+            }
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "char_eye",
+            "targets": [
+              "GEO_char_eye_L",
+              "GEO_char_eye_R"
+            ]
+          }
+        },
+        {
+          "op": "assign_by_normal",
+          "args": {
+            "target": "GEO_char_eye_L",
+            "material": "char_iris",
+            "direction": [
+              0,
+              -1,
+              0
+            ],
+            "min_dot": 0.85
+          }
+        },
+        {
+          "op": "assign_by_normal",
+          "args": {
+            "target": "GEO_char_eye_R",
+            "material": "char_iris",
+            "direction": [
+              0,
+              -1,
+              0
+            ],
+            "min_dot": 0.85
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "floor",
+            "targets": [
+              "GEO_floor"
+            ]
+          }
+        }
+      ]
+    },
+    "hair": {
+      "ops": [
+        {
+          "op": "hair_material",
+          "args": {
+            "name": "char_hair",
+            "melanin": 0.95,
+            "redness": 0.05,
+            "roughness": 0.4
+          }
+        },
+        {
+          "op": "groom",
+          "args": {
+            "name": "GEO_char_hair",
+            "surface": "GEO_char_body",
+            "count": 6000,
+            "length": 0.07,
+            "length_var": 0.3,
+            "region": {
+              "z_min": 1.672,
+              "direction": [
+                0,
+                0.6,
+                1
+              ],
+              "min_dot": 0.05
+            },
+            "gravity": 0.8,
+            "clump": 0.45,
+            "guides": 80,
+            "segments": 6,
+            "radius_root": 0.0011,
+            "radius_tip": 0.0002,
+            "lift": 0.003,
+            "seed": 7,
+            "material": "char_hair"
+          }
+        }
+      ],
+      "acceptance_extra": [
+        {
+          "check": "hair_roots_on_surface",
+          "args": {
+            "prefix": "GEO_char_hair"
+          },
+          "desc": "roots sit on the scalp"
+        }
+      ]
+    },
+    "rig_face": {
+      "ops": [
+        {
+          "op": "region_key",
+          "args": {
+            "mesh": "GEO_char_body",
+            "name": "jaw_open",
+            "center": [
+              0,
+              -0.09,
+              1.63
+            ],
+            "radius": 0.07,
+            "rotate": [
+              "X",
+              14,
+              [
+                0,
+                -0.01,
+                1.665
+              ]
+            ],
+            "below": 1.665
+          }
+        },
+        {
+          "op": "region_key",
+          "args": {
+            "mesh": "GEO_char_body",
+            "name": "smile",
+            "center": [
+              0.03,
+              -0.095,
+              1.645
+            ],
+            "radius": 0.025,
+            "offset": [
+              0.004,
+              0.003,
+              0.006
+            ],
+            "mirror": true
+          }
+        },
+        {
+          "op": "split_lr",
+          "args": {
+            "mesh": "GEO_char_body",
+            "key": "smile",
+            "remove_source": true
+          }
+        },
+        {
+          "op": "region_key",
+          "args": {
+            "mesh": "GEO_char_body",
+            "name": "brow_up",
+            "center": [
+              0.035,
+              -0.105,
+              1.745
+            ],
+            "radius": 0.03,
+            "offset": [
+              0,
+              0,
+              0.006
+            ],
+            "mirror": true
+          }
+        },
+        {
+          "op": "face_control",
+          "args": {
+            "name": "CTRL_jaw",
+            "location": [
+              0,
+              -0.25,
+              1.6
+            ]
+          }
+        },
+        {
+          "op": "face_control",
+          "args": {
+            "name": "CTRL_mouth_L",
+            "location": [
+              0.06,
+              -0.25,
+              1.65
+            ]
+          }
+        },
+        {
+          "op": "face_control",
+          "args": {
+            "name": "CTRL_mouth_R",
+            "location": [
+              -0.06,
+              -0.25,
+              1.65
+            ]
+          }
+        },
+        {
+          "op": "face_control",
+          "args": {
+            "name": "CTRL_brows",
+            "location": [
+              0,
+              -0.25,
+              1.77
+            ]
+          }
+        },
+        {
+          "op": "drive",
+          "args": {
+            "mesh": "GEO_char_body",
+            "key": "jaw_open",
+            "control": "CTRL_jaw",
+            "full": -0.02
+          }
+        },
+        {
+          "op": "drive",
+          "args": {
+            "mesh": "GEO_char_body",
+            "key": "smile_L",
+            "control": "CTRL_mouth_L",
+            "full": 0.015
+          }
+        },
+        {
+          "op": "drive",
+          "args": {
+            "mesh": "GEO_char_body",
+            "key": "smile_R",
+            "control": "CTRL_mouth_R",
+            "full": 0.015
+          }
+        },
+        {
+          "op": "drive",
+          "args": {
+            "mesh": "GEO_char_body",
+            "key": "brow_up",
+            "control": "CTRL_brows",
+            "full": 0.015
+          }
+        }
+      ]
+    },
+    "rig_body": {
+      "ops": [
+        {
+          "op": "armature_from_joints",
+          "args": {
+            "mesh": "GEO_char_body",
+            "name": "RIG_char"
+          }
+        },
+        {
+          "op": "ik_limbs",
+          "args": {
+            "rig": "RIG_char",
+            "limbs": {
+              "shin_L": [
+                2,
+                [
+                  0,
+                  -1,
+                  0
+                ]
+              ],
+              "shin_R": [
+                2,
+                [
+                  0,
+                  -1,
+                  0
+                ]
+              ]
+            }
+          }
+        },
+        {
+          "op": "bind",
+          "args": {
+            "mesh": "GEO_char_body",
+            "rig": "RIG_char"
+          }
+        },
+        {
+          "op": "bind_extras",
+          "args": {
+            "rig": "RIG_char",
+            "objects": [
+              "GEO_char_hair",
+              "GEO_char_eye_L",
+              "GEO_char_eye_R",
+              "CTRL_jaw",
+              "CTRL_mouth_L",
+              "CTRL_mouth_R",
+              "CTRL_brows"
+            ],
+            "bone": "head"
+          }
+        }
+      ],
+      "acceptance_extra": [
+        {
+          "check": "ik_rest_stable",
+          "args": {
+            "rig": "RIG_char"
+          },
+          "desc": "IK keeps the rest pose"
+        }
+      ]
+    },
+    "animation": {
+      "ops": [
+        {
+          "op": "frame_range",
+          "args": {
+            "start": 1,
+            "end": 48,
+            "fps": 24
+          }
+        },
+        {
+          "op": "pose_keys",
+          "args": {
+            "rig": "RIG_char",
+            "poses": {
+              "1": {
+                "upper_arm_R": [
+                  0,
+                  0,
+                  0
+                ],
+                "forearm_R": [
+                  0,
+                  0,
+                  0
+                ],
+                "head": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "10": {
+                "upper_arm_R": [
+                  0,
+                  0,
+                  -75
+                ],
+                "forearm_R": [
+                  0,
+                  0,
+                  -40
+                ],
+                "head": [
+                  0,
+                  0,
+                  6
+                ]
+              },
+              "38": {
+                "upper_arm_R": [
+                  0,
+                  0,
+                  -75
+                ],
+                "forearm_R": [
+                  0,
+                  0,
+                  -40
+                ],
+                "head": [
+                  0,
+                  0,
+                  6
+                ]
+              },
+              "48": {
+                "upper_arm_R": [
+                  0,
+                  0,
+                  0
+                ],
+                "forearm_R": [
+                  0,
+                  0,
+                  0
+                ],
+                "head": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            }
+          }
+        },
+        {
+          "op": "wave",
+          "args": {
+            "target": "RIG_char",
+            "data_path": "rotation_euler",
+            "index": 2,
+            "amplitude": 20,
+            "period": 10,
+            "start": 10,
+            "cycles": 2.5,
+            "bone": "hand_R",
+            "degrees": true,
+            "loop": false
+          }
+        },
+        {
+          "op": "wave",
+          "args": {
+            "target": "RIG_char",
+            "data_path": "rotation_euler",
+            "index": 0,
+            "amplitude": 2,
+            "period": 48,
+            "bone": "chest",
+            "degrees": true
+          }
+        },
+        {
+          "op": "keyframes",
+          "args": {
+            "target": "CTRL_jaw",
+            "data_path": "location",
+            "index": 2,
+            "keys": [
+              [
+                1,
+                1.6
+              ],
+              [
+                14,
+                1.6
+              ],
+              [
+                17,
+                1.585
+              ],
+              [
+                21,
+                1.6
+              ]
+            ]
+          }
+        },
+        {
+          "op": "keyframes",
+          "args": {
+            "target": "CTRL_mouth_L",
+            "data_path": "location",
+            "index": 2,
+            "keys": [
+              [
+                1,
+                1.65
+              ],
+              [
+                8,
+                1.665
+              ],
+              [
+                44,
+                1.665
+              ],
+              [
+                48,
+                1.65
+              ]
+            ]
+          }
+        },
+        {
+          "op": "keyframes",
+          "args": {
+            "target": "CTRL_mouth_R",
+            "data_path": "location",
+            "index": 2,
+            "keys": [
+              [
+                1,
+                1.65
+              ],
+              [
+                8,
+                1.665
+              ],
+              [
+                44,
+                1.665
+              ],
+              [
+                48,
+                1.65
+              ]
+            ]
+          }
+        },
+        {
+          "op": "keyframes",
+          "args": {
+            "target": "CTRL_brows",
+            "data_path": "location",
+            "index": 2,
+            "keys": [
+              [
+                1,
+                1.77
+              ],
+              [
+                10,
+                1.78
+              ],
+              [
+                30,
+                1.78
+              ],
+              [
+                40,
+                1.77
+              ]
+            ]
+          }
+        },
+        {
+          "op": "bake_shape_keys",
+          "args": {
+            "mesh": "GEO_char_body"
+          }
+        }
+      ],
+      "acceptance_extra": [
+        {
+          "check": "no_pops",
+          "args": {
+            "objects": [
+              "RIG_char"
+            ]
+          },
+          "desc": "no pops or flips"
+        }
+      ]
+    },
+    "lighting": {
+      "ops": [
+        {
+          "op": "world",
+          "args": {
+            "kind": "gradient",
+            "color": [
+              0.4,
+              0.43,
+              0.48
+            ],
+            "strength": 0.5
+          }
+        },
+        {
+          "op": "three_point",
+          "args": {
+            "objects": [
+              "GEO_char_body"
+            ],
+            "camera": "CAM_hero",
+            "ratio": 2.5
+          }
+        }
+      ]
+    },
+    "render": {
+      "ops": [
+        {
+          "op": "render_preset",
+          "args": {
+            "kind": "preview",
+            "samples": 48,
+            "res": [
+              768,
+              960
+            ],
+            "denoiser": "compositor"
+          }
+        },
+        {
+          "op": "compositor",
+          "args": {
+            "denoise": true
+          }
+        },
+        {
+          "op": "render_deliverables",
+          "args": {
+            "cameras": [
+              "CAM_hero"
+            ],
+            "frames": [
+              24
+            ]
+          }
+        }
+      ]
+    },
+    "qa": {
+      "ops": [
+        {
+          "op": "qa_run"
+        }
+      ]
+    },
+    "export": {
+      "ops": [
+        {
+          "op": "export",
+          "args": {
+            "preset": "ue5_fbx",
+            "objects": [
+              "GEO_char_body",
+              "GEO_char_eye_L",
+              "GEO_char_eye_R"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

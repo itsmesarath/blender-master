@@ -1,0 +1,9 @@
+# URL hosts that may appear in repo text (subdomains allowed).
+blender.org
+opensource.org
+keepachangelog.com
+semver.org
+agentskills.io
+modelcontextprotocol.io
+python.org
+github.com

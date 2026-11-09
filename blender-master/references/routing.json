@@ -1,0 +1,118 @@
+{
+  "schema": "blender-master/routing@1",
+  "subskills": {
+    "blockout-spatial-brief": "core",
+    "modeling-topology": "core",
+    "materials-shading": "core",
+    "lighting-cameras": "core",
+    "render-compositing": "core",
+    "scripting-automation": "core",
+    "qa-review": "core",
+    "export-interchange": "core",
+    "live-control-mcp": "core",
+    "geometry-nodes": "core",
+    "sculpting": "core",
+    "retopology": "core",
+    "uv-texturing-baking": "core",
+    "hair-fur": "core",
+    "rigging-body": "core",
+    "rigging-face": "core",
+    "animation": "core",
+    "physics-simulation": "core",
+    "scene-environment": "core",
+    "product-shots": "core",
+    "npr-stylized": "core",
+    "video-editing": "core",
+    "grease-pencil-2d": "later",
+    "asset-management": "later"
+  },
+  "roles": {
+    "blockout": {
+      "subskill": "blockout-spatial-brief"
+    },
+    "environment": {
+      "subskill": "scene-environment",
+      "fallback": "blockout-spatial-brief"
+    },
+    "procedural": {
+      "subskill": "geometry-nodes",
+      "fallback": "scripting-automation"
+    },
+    "model": {
+      "subskill": "modeling-topology"
+    },
+    "sculpt": {
+      "subskill": "sculpting",
+      "fallback": "manual"
+    },
+    "retopo": {
+      "subskill": "retopology",
+      "fallback": "modeling-topology"
+    },
+    "uv": {
+      "subskill": "uv-texturing-baking",
+      "fallback": "modeling-topology"
+    },
+    "bake": {
+      "subskill": "uv-texturing-baking",
+      "fallback": "manual"
+    },
+    "materials": {
+      "subskill": "materials-shading"
+    },
+    "npr": {
+      "subskill": "npr-stylized",
+      "fallback": "materials-shading"
+    },
+    "hair": {
+      "subskill": "hair-fur",
+      "fallback": "manual"
+    },
+    "rig_face": {
+      "subskill": "rigging-face",
+      "fallback": "manual"
+    },
+    "rig_body": {
+      "subskill": "rigging-body",
+      "fallback": "manual"
+    },
+    "simulation": {
+      "subskill": "physics-simulation",
+      "fallback": "manual"
+    },
+    "animation": {
+      "subskill": "animation",
+      "fallback": "lighting-cameras"
+    },
+    "lighting": {
+      "subskill": "lighting-cameras"
+    },
+    "product": {
+      "subskill": "product-shots",
+      "fallback": "lighting-cameras"
+    },
+    "render": {
+      "subskill": "render-compositing"
+    },
+    "edit": {
+      "subskill": "video-editing",
+      "fallback": "manual"
+    },
+    "script": {
+      "subskill": "scripting-automation"
+    },
+    "gp2d": {
+      "subskill": "grease-pencil-2d",
+      "fallback": "manual"
+    },
+    "qa": {
+      "subskill": "qa-review"
+    },
+    "export": {
+      "subskill": "export-interchange"
+    },
+    "live": {
+      "subskill": "live-control-mcp"
+    }
+  }
+}

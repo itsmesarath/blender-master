@@ -1,0 +1,390 @@
+{
+  "project": "scifi-crate",
+  "facts": {
+    "subject_prefix": "GEO_crate_",
+    "subject_proxy": "PRX_crate",
+    "subject_size": [
+      0.64,
+      0.64,
+      0.64
+    ],
+    "tri_budget": 3000,
+    "min_quad_ratio": 0.9,
+    "hero_camera": "CAM_hero",
+    "cameras": [
+      "CAM_hero"
+    ],
+    "resolution": [
+      960,
+      540
+    ],
+    "min_fill": 0.2,
+    "exposure": {
+      "max_clipped": 0.04
+    }
+  },
+  "skip_roles": [
+    "retopo",
+    "bake"
+  ],
+  "assumptions": [
+    "modelled directly at game resolution, so no high-poly and no retopology pass",
+    "procedural materials preview the look; texture baking is left for the UV/baking sub-skill",
+    "crate 60 cm cube plus 2 cm corner guards (64 cm overall)"
+  ],
+  "roles": {
+    "blockout": {
+      "ops": [
+        {
+          "op": "setup_scene",
+          "args": {
+            "frame_range": [
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "op": "resolution",
+          "args": {
+            "res": [
+              960,
+              540
+            ]
+          }
+        },
+        {
+          "op": "proxy",
+          "args": {
+            "name": "PRX_crate",
+            "shape": "box",
+            "size": [
+              0.64,
+              0.64,
+              0.64
+            ],
+            "note": "crate body 60 cm with corner guards"
+          }
+        },
+        {
+          "op": "ground",
+          "args": {
+            "size": [
+              4,
+              4
+            ]
+          }
+        },
+        {
+          "op": "camera",
+          "args": {
+            "name": "CAM_hero",
+            "lens": 50,
+            "view": "three_quarter",
+            "objects": "PRX_crate",
+            "fill": 0.8
+          }
+        },
+        {
+          "op": "write_spatial_brief"
+        }
+      ]
+    },
+    "model": {
+      "ops": [
+        {
+          "op": "box",
+          "args": {
+            "name": "GEO_crate_body",
+            "size": [
+              0.6,
+              0.6,
+              0.6
+            ],
+            "location": [
+              0,
+              0,
+              0.02
+            ]
+          }
+        },
+        {
+          "op": "panel_inset",
+          "args": {
+            "target": "GEO_crate_body",
+            "thickness": 0.06,
+            "depth": 0.035,
+            "faces": "all",
+            "inner_material_index": 1
+          }
+        },
+        {
+          "op": "hs_bevel",
+          "args": {
+            "target": "GEO_crate_body",
+            "width": 0.006,
+            "segments": 2,
+            "angle": 40
+          }
+        },
+        {
+          "op": "box",
+          "args": {
+            "name": "GEO_crate_feet",
+            "size": [
+              0.64,
+              0.64,
+              0.02
+            ],
+            "location": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "op": "panel_inset",
+          "args": {
+            "target": "GEO_crate_feet",
+            "thickness": 0.08,
+            "depth": 0.0,
+            "faces": "top"
+          }
+        },
+        {
+          "op": "hs_bevel",
+          "args": {
+            "target": "GEO_crate_feet",
+            "width": 0.004,
+            "segments": 1,
+            "angle": 40
+          }
+        },
+        {
+          "op": "box",
+          "args": {
+            "name": "GEO_crate_lidrim",
+            "size": [
+              0.64,
+              0.64,
+              0.03
+            ],
+            "location": [
+              0,
+              0,
+              0.6
+            ]
+          }
+        },
+        {
+          "op": "hs_bevel",
+          "args": {
+            "target": "GEO_crate_lidrim",
+            "width": 0.004,
+            "segments": 1,
+            "angle": 40
+          }
+        },
+        {
+          "op": "hide_proxies"
+        }
+      ]
+    },
+    "uv": {
+      "ops": [
+        {
+          "op": "unwrap",
+          "args": {
+            "targets": "GEO_crate_",
+            "method": "smart"
+          }
+        }
+      ]
+    },
+    "materials": {
+      "ops": [
+        {
+          "op": "material",
+          "args": {
+            "name": "crate_paint",
+            "preset": "worn_metal",
+            "procedural_args": {
+              "paint": [
+                0.035,
+                0.045,
+                0.015,
+                1
+              ],
+              "wear": 0.25,
+              "paint_roughness": 0.6
+            }
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "crate_panel",
+            "preset": "metal_painted",
+            "color": [
+              0.06,
+              0.07,
+              0.08
+            ],
+            "overrides": {
+              "Roughness": 0.55
+            }
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "crate_trim",
+            "preset": "metal_brushed",
+            "color": [
+              0.25,
+              0.25,
+              0.27
+            ],
+            "overrides": {
+              "Roughness": 0.45
+            }
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "floor",
+            "preset": "concrete"
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "crate_paint",
+            "targets": [
+              "GEO_crate_body"
+            ]
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "crate_panel",
+            "targets": [
+              "GEO_crate_body"
+            ],
+            "replace": false
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "crate_trim",
+            "targets": [
+              "GEO_crate_feet",
+              "GEO_crate_lidrim"
+            ]
+          }
+        }
+      ]
+    },
+    "lighting": {
+      "ops": [
+        {
+          "op": "world",
+          "args": {
+            "kind": "gradient",
+            "color": [
+              0.35,
+              0.38,
+              0.42
+            ],
+            "strength": 0.6
+          }
+        },
+        {
+          "op": "three_point",
+          "args": {
+            "objects": "GEO_crate_",
+            "camera": "CAM_hero",
+            "ratio": 2.5,
+            "key_energy": 80
+          }
+        }
+      ]
+    },
+    "render": {
+      "ops": [
+        {
+          "op": "render_preset",
+          "args": {
+            "kind": "preview",
+            "samples": 48,
+            "res": [
+              960,
+              540
+            ],
+            "denoiser": "compositor"
+          }
+        },
+        {
+          "op": "compositor",
+          "args": {
+            "denoise": true
+          }
+        },
+        {
+          "op": "render_deliverables",
+          "args": {
+            "cameras": [
+              "CAM_hero"
+            ]
+          }
+        }
+      ],
+      "acceptance_extra": [
+        {
+          "check": "compositor_chain",
+          "args": {
+            "contains": [
+              "CompositorNodeDenoise"
+            ]
+          },
+          "desc": "denoise feeds the group output"
+        }
+      ]
+    },
+    "qa": {
+      "ops": [
+        {
+          "op": "qa_run"
+        }
+      ]
+    },
+    "export": {
+      "ops": [
+        {
+          "op": "prepare",
+          "args": {
+            "objects": "GEO_crate_"
+          }
+        },
+        {
+          "op": "export",
+          "args": {
+            "preset": "unity_fbx",
+            "objects": "GEO_crate_"
+          }
+        },
+        {
+          "op": "export",
+          "args": {
+            "preset": "gltf_web",
+            "objects": "GEO_crate_"
+          }
+        }
+      ]
+    }
+  }
+}

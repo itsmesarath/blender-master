@@ -1,0 +1,636 @@
+{
+  "project": "speaker-ad",
+  "type_override": {
+    "primary": "product_shot",
+    "modifiers": [
+      "vfx_sim"
+    ],
+    "ambiguous": false
+  },
+  "add_roles": [
+    "edit"
+  ],
+  "facts": {
+    "subject_prefix": "GEO_spk_",
+    "subject_proxy": "PRX_spk",
+    "subject_size": [
+      0.104,
+      0.104,
+      0.16
+    ],
+    "hero_camera": "CAM_hero",
+    "cameras": [
+      "CAM_hero"
+    ],
+    "resolution": [
+      640,
+      360
+    ],
+    "min_fill": 0.05,
+    "frame_margin": 0.02,
+    "sim_objects": "GEO_pebble_",
+    "fps": 24,
+    "video": "video/ad.mp4",
+    "video_audio": true,
+    "exposure": {
+      "max_clipped": 0.05
+    }
+  },
+  "assumptions": [
+    "speaker 10.4 cm wide, 16 cm tall; pebbles 2-2.5 cm",
+    "the cloth settles over the speaker during a 24-frame pre-roll that is simulated but not rendered; frames 25-108 make the 3.5 s cut (reveal from 36, pebbles from 40, logo 66-86, end card from 94)",
+    "the sound is a generated placeholder tone; swap in licensed music for delivery",
+    "a hidden collider box under the sweep floor catches the pebbles (the sweep itself is rebuilt by the studio op)"
+  ],
+  "roles": {
+    "blockout": {
+      "ops": [
+        {
+          "op": "setup_scene",
+          "args": {
+            "fps": 24,
+            "frame_range": [
+              1,
+              108
+            ]
+          }
+        },
+        {
+          "op": "resolution",
+          "args": {
+            "res": [
+              640,
+              360
+            ]
+          }
+        },
+        {
+          "op": "proxy",
+          "args": {
+            "name": "PRX_spk",
+            "shape": "cylinder",
+            "size": [
+              0.104,
+              0.104,
+              0.16
+            ],
+            "note": "speaker"
+          }
+        },
+        {
+          "op": "camera",
+          "args": {
+            "name": "CAM_hero",
+            "lens": 50,
+            "location": [
+              0.0,
+              -1.0,
+              0.32
+            ],
+            "target": [
+              0.0,
+              0.0,
+              0.1
+            ]
+          }
+        },
+        {
+          "op": "write_spatial_brief"
+        }
+      ]
+    },
+    "model": {
+      "ops": [
+        {
+          "op": "lathe",
+          "args": {
+            "name": "GEO_spk_body",
+            "segments": 64,
+            "profile": [
+              [
+                0,
+                0
+              ],
+              [
+                0.05,
+                0
+              ],
+              [
+                0.052,
+                0.004
+              ],
+              [
+                0.052,
+                0.15
+              ],
+              [
+                0.049,
+                0.157
+              ],
+              [
+                0,
+                0.158
+              ]
+            ]
+          }
+        },
+        {
+          "op": "lathe",
+          "args": {
+            "name": "GEO_spk_top",
+            "segments": 64,
+            "profile": [
+              [
+                0,
+                0.157
+              ],
+              [
+                0.044,
+                0.157
+              ],
+              [
+                0.046,
+                0.159
+              ],
+              [
+                0.044,
+                0.16
+              ],
+              [
+                0,
+                0.16
+              ]
+            ]
+          }
+        },
+        {
+          "op": "sphere",
+          "args": {
+            "name": "GEO_pebble_a",
+            "radius": 0.022,
+            "segments": 16,
+            "rings": 8,
+            "location": [
+              -0.2,
+              -0.05,
+              0.35
+            ]
+          }
+        },
+        {
+          "op": "sphere",
+          "args": {
+            "name": "GEO_pebble_b",
+            "radius": 0.018,
+            "segments": 16,
+            "rings": 8,
+            "location": [
+              0.21,
+              -0.02,
+              0.42
+            ]
+          }
+        },
+        {
+          "op": "sphere",
+          "args": {
+            "name": "GEO_pebble_c",
+            "radius": 0.02,
+            "segments": 16,
+            "rings": 8,
+            "location": [
+              0.26,
+              0.06,
+              0.5
+            ]
+          }
+        },
+        {
+          "op": "box",
+          "args": {
+            "name": "GEO_collider",
+            "size": [
+              1.6,
+              1.6,
+              0.02
+            ],
+            "location": [
+              0,
+              0,
+              -0.0203
+            ]
+          }
+        },
+        {
+          "op": "hide_proxies"
+        }
+      ]
+    },
+    "materials": {
+      "ops": [
+        {
+          "op": "material",
+          "args": {
+            "name": "speaker_fabric",
+            "preset": "fabric",
+            "color": [
+              0.04,
+              0.045,
+              0.05
+            ],
+            "overrides": {
+              "Sheen Weight": 0.15
+            }
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "speaker_top",
+            "preset": "metal_brushed",
+            "color": [
+              0.8,
+              0.78,
+              0.74
+            ]
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "pebble",
+            "preset": "ceramic",
+            "color": [
+              0.85,
+              0.83,
+              0.8
+            ],
+            "overrides": {
+              "Roughness": 0.5
+            }
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "collider",
+            "preset": "clay"
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "speaker_fabric",
+            "targets": [
+              "GEO_spk_body"
+            ]
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "speaker_top",
+            "targets": [
+              "GEO_spk_top"
+            ]
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "pebble",
+            "targets": "GEO_pebble_"
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "collider",
+            "targets": [
+              "GEO_collider"
+            ]
+          }
+        }
+      ]
+    },
+    "simulation": {
+      "ops": [
+        {
+          "op": "rigid_world",
+          "args": {
+            "substeps": 10,
+            "iterations": 10,
+            "frame_start": 40,
+            "frame_end": 108
+          }
+        },
+        {
+          "op": "rigid_body",
+          "args": {
+            "targets": "GEO_pebble_",
+            "kind": "ACTIVE",
+            "shape": "SPHERE",
+            "mass": 0.05,
+            "friction": 0.6,
+            "bounciness": 0.3,
+            "damping": 0.2
+          }
+        },
+        {
+          "op": "rigid_body",
+          "args": {
+            "targets": [
+              "GEO_collider",
+              "GEO_spk_body"
+            ],
+            "kind": "PASSIVE",
+            "shape": "MESH"
+          }
+        },
+        {
+          "op": "bake",
+          "args": {
+            "frame_end": 108
+          }
+        }
+      ],
+      "acceptance_extra": [
+        {
+          "check": "sim_settled",
+          "args": {
+            "objects": "GEO_pebble_"
+          },
+          "desc": "pebbles come to rest"
+        }
+      ]
+    },
+    "product": {
+      "ops": [
+        {
+          "op": "studio",
+          "args": {
+            "subject": "GEO_spk_",
+            "style": "warm",
+            "camera": "CAM_hero",
+            "world_strength": 0.3
+          }
+        },
+        {
+          "op": "cloth_reveal",
+          "args": {
+            "subject": "GEO_spk_",
+            "frames": [
+              1,
+              84
+            ],
+            "pull_start": 36,
+            "preset": "silk",
+            "color": [
+              0.55,
+              0.04,
+              0.06
+            ]
+          }
+        },
+        {
+          "op": "logo_reveal",
+          "args": {
+            "text": "YOUR BRAND",
+            "location": [
+              0,
+              0.12,
+              0.2
+            ],
+            "size": 0.05,
+            "frames": [
+              66,
+              86
+            ],
+            "style": "rise"
+          }
+        },
+        {
+          "op": "end_card",
+          "args": {
+            "title": "YOUR BRAND",
+            "subtitle": "Sound, simplified",
+            "camera": "CAM_hero",
+            "frame": 94
+          }
+        }
+      ],
+      "acceptance_extra": [
+        {
+          "check": "reveal_clear",
+          "args": {
+            "subject": "GEO_spk_",
+            "frame": 84
+          },
+          "desc": "cloth clear of the product after the pull"
+        },
+        {
+          "check": "safe_area",
+          "args": {
+            "camera": "CAM_hero",
+            "objects": "GEO_spk_",
+            "frame": 84
+          },
+          "desc": "product inside the safe area"
+        },
+        {
+          "check": "hidden_until",
+          "args": {
+            "objects": "GEO_logo",
+            "camera": "CAM_hero"
+          },
+          "desc": "logo stays hidden until its rise starts"
+        }
+      ]
+    },
+    "render": {
+      "ops": [
+        {
+          "op": "render_preset",
+          "args": {
+            "kind": "preview",
+            "samples": 12,
+            "res": [
+              640,
+              360
+            ],
+            "denoiser": "compositor"
+          }
+        },
+        {
+          "op": "compositor",
+          "args": {
+            "denoise": true
+          }
+        },
+        {
+          "op": "render_deliverables",
+          "args": {
+            "cameras": [
+              "CAM_hero"
+            ],
+            "frames": [
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108
+            ]
+          }
+        }
+      ]
+    },
+    "edit": {
+      "ops": [
+        {
+          "op": "edit_setup",
+          "args": {
+            "fps": 24,
+            "res": [
+              640,
+              360
+            ]
+          }
+        },
+        {
+          "op": "add_frames",
+          "args": {
+            "pattern": "renders/CAM_hero_f*.png",
+            "name": "SEQ_ad",
+            "start": 1
+          }
+        },
+        {
+          "op": "fade",
+          "args": {
+            "strip": "SEQ_ad",
+            "fade_in": 0.25,
+            "fade_out": 0.0
+          }
+        },
+        {
+          "op": "tone",
+          "args": {
+            "path": "audio/placeholder.wav",
+            "seconds": 3.5,
+            "freq": 196.0,
+            "volume": 0.25,
+            "beats": 2.0
+          }
+        },
+        {
+          "op": "add_sound",
+          "args": {
+            "path": "audio/placeholder.wav",
+            "start": 1,
+            "fade_in": 0.2,
+            "fade_out": 0.6
+          }
+        },
+        {
+          "op": "encode",
+          "args": {
+            "path": "video/ad.mp4",
+            "quality": "HIGH"
+          }
+        }
+      ]
+    },
+    "qa": {
+      "ops": [
+        {
+          "op": "qa_run",
+          "args": {
+            "known_issues": [
+              "preview samples only; raise samples for the final",
+              "placeholder tone instead of music"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

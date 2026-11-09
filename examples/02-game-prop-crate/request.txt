@@ -1,0 +1,1 @@
+Game-ready low-poly sci-fi supply crate for Unity, under 3k tris, bevelled edges and recessed panels, painted metal with worn edges; export FBX and glTF.
