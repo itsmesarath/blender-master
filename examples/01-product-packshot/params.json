@@ -1,0 +1,349 @@
+{
+  "project": "perfume-packshot",
+  "execution_mode": "headless",
+  "facts": {
+    "subject_prefix": "GEO_bottle_",
+    "subject_proxy": "PRX_bottle",
+    "subject_size": [
+      0.07,
+      0.07,
+      0.13
+    ],
+    "hero_camera": "CAM_hero",
+    "cameras": [
+      "CAM_hero",
+      "CAM_front"
+    ],
+    "resolution": [
+      960,
+      540
+    ],
+    "frame_margin": 0.05,
+    "min_fill": 0.06,
+    "exposure": {
+      "mean_min": 0.15,
+      "mean_max": 0.7,
+      "max_clipped": 0.03
+    }
+  },
+  "style": {
+    "look": "clean commercial, soft highlights, amber glass, gold cap"
+  },
+  "assumptions": [
+    "bottle ~7 cm wide, 13 cm tall with cap (typical 50 ml size)",
+    "still images only; no motion beat"
+  ],
+  "roles": {
+    "blockout": {
+      "goal": "Real-scale stand-ins and the two deliverable cameras",
+      "ops": [
+        {
+          "op": "setup_scene",
+          "args": {
+            "fps": 24,
+            "frame_range": [
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "op": "resolution",
+          "args": {
+            "res": [
+              960,
+              540
+            ]
+          }
+        },
+        {
+          "op": "proxy",
+          "args": {
+            "name": "PRX_bottle",
+            "shape": "cylinder",
+            "size": [
+              0.07,
+              0.07,
+              0.13
+            ],
+            "note": "perfume bottle incl. cap; amber glass body, gold cap"
+          }
+        },
+        {
+          "op": "proxy",
+          "args": {
+            "name": "PRX_sweep",
+            "shape": "box",
+            "size": [
+              1.2,
+              1.0,
+              0.02
+            ],
+            "location": [
+              0,
+              0.2,
+              -0.02
+            ],
+            "note": "seamless sweep, curves up behind the bottle"
+          }
+        },
+        {
+          "op": "camera",
+          "args": {
+            "name": "CAM_hero",
+            "lens": 85,
+            "view": "low_hero",
+            "objects": "PRX_bottle",
+            "fill": 0.75
+          }
+        },
+        {
+          "op": "camera",
+          "args": {
+            "name": "CAM_front",
+            "lens": 85,
+            "view": "front",
+            "objects": "PRX_bottle",
+            "fill": 0.7
+          }
+        },
+        {
+          "op": "review_layer"
+        },
+        {
+          "op": "write_spatial_brief"
+        }
+      ]
+    },
+    "model": {
+      "goal": "Lathed glass body with shoulder and neck, separate cap, cyclorama",
+      "ops": [
+        {
+          "op": "lathe",
+          "args": {
+            "name": "GEO_bottle_glass",
+            "segments": 64,
+            "profile": [
+              [
+                0,
+                0
+              ],
+              [
+                0.03,
+                0
+              ],
+              [
+                0.034,
+                0.003
+              ],
+              [
+                0.035,
+                0.01
+              ],
+              [
+                0.035,
+                0.078
+              ],
+              [
+                0.032,
+                0.086
+              ],
+              [
+                0.016,
+                0.091
+              ],
+              [
+                0.01,
+                0.093
+              ],
+              [
+                0.009,
+                0.1
+              ],
+              [
+                0,
+                0.1
+              ]
+            ]
+          }
+        },
+        {
+          "op": "lathe",
+          "args": {
+            "name": "GEO_bottle_cap",
+            "segments": 64,
+            "profile": [
+              [
+                0,
+                0.1
+              ],
+              [
+                0.017,
+                0.1
+              ],
+              [
+                0.018,
+                0.102
+              ],
+              [
+                0.018,
+                0.127
+              ],
+              [
+                0.016,
+                0.13
+              ],
+              [
+                0,
+                0.13
+              ]
+            ]
+          }
+        },
+        {
+          "op": "cyclorama",
+          "args": {
+            "name": "GEO_sweep",
+            "width": 3.0,
+            "depth": 1.6,
+            "height": 1.4,
+            "radius": 0.4
+          }
+        },
+        {
+          "op": "hide_proxies"
+        }
+      ]
+    },
+    "materials": {
+      "ops": [
+        {
+          "op": "material",
+          "args": {
+            "name": "bottle_glass",
+            "preset": "glass_tinted",
+            "color": [
+              0.95,
+              0.62,
+              0.3
+            ]
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "cap_gold",
+            "preset": "metal_gold"
+          }
+        },
+        {
+          "op": "material",
+          "args": {
+            "name": "sweep",
+            "preset": "paper_backdrop",
+            "color": [
+              0.55,
+              0.55,
+              0.56
+            ]
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "bottle_glass",
+            "targets": [
+              "GEO_bottle_glass"
+            ]
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "cap_gold",
+            "targets": [
+              "GEO_bottle_cap"
+            ]
+          }
+        },
+        {
+          "op": "assign",
+          "args": {
+            "material": "sweep",
+            "targets": [
+              "GEO_sweep"
+            ]
+          }
+        }
+      ]
+    },
+    "product": {
+      "ops": [
+        {
+          "op": "world",
+          "args": {
+            "kind": "studio",
+            "color": [
+              0.03,
+              0.03,
+              0.035
+            ],
+            "strength": 1.0
+          }
+        },
+        {
+          "op": "softbox_studio",
+          "args": {
+            "objects": "GEO_bottle_",
+            "camera": "CAM_hero"
+          }
+        },
+        {
+          "op": "depth_of_field",
+          "args": {
+            "camera": "CAM_hero",
+            "focus": "GEO_bottle_",
+            "fstop": 5.6
+          }
+        }
+      ]
+    },
+    "render": {
+      "ops": [
+        {
+          "op": "render_preset",
+          "args": {
+            "kind": "preview",
+            "engine": "CYCLES",
+            "samples": 64,
+            "res": [
+              960,
+              540
+            ]
+          }
+        },
+        {
+          "op": "render_deliverables",
+          "args": {
+            "cameras": [
+              "CAM_hero",
+              "CAM_front"
+            ]
+          }
+        }
+      ]
+    },
+    "qa": {
+      "ops": [
+        {
+          "op": "qa_run",
+          "args": {
+            "known_issues": [
+              "preview samples only; raise samples for the final"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

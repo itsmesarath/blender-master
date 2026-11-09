@@ -1,0 +1,567 @@
+{
+  "schema": "blender-master/taxonomy@1",
+  "modifier_threshold": 2,
+  "ambiguity_margin": 1,
+  "types": {
+    "character": {
+      "label": "Character (humanoid)",
+      "signals": {
+        "character": 3,
+        "person": 2,
+        "human": 2,
+        "hero": 1,
+        "girl": 2,
+        "boy": 2,
+        "man": 1,
+        "woman": 2,
+        "face": 1,
+        "body": 1,
+        "turnaround": 2,
+        "t-pose": 3,
+        "a-pose": 3,
+        "bust": 2,
+        "portrait": 1,
+        "mascot": 2,
+        "avatar": 2
+      },
+      "roles": [
+        "blockout",
+        "model",
+        "sculpt",
+        "retopo",
+        "uv",
+        "bake",
+        "materials",
+        "hair",
+        "rig_face",
+        "rig_body",
+        "animation",
+        "lighting",
+        "render",
+        "qa",
+        "export"
+      ]
+    },
+    "creature": {
+      "label": "Creature / furry",
+      "signals": {
+        "creature": 3,
+        "animal": 3,
+        "fur": 3,
+        "furry": 3,
+        "paws": 3,
+        "muzzle": 3,
+        "tail": 2,
+        "mane": 3,
+        "monster": 2,
+        "dragon": 2,
+        "cat": 2,
+        "dog": 2,
+        "fox": 2,
+        "wolf": 2,
+        "bear": 2
+      },
+      "roles": [
+        "blockout",
+        "model",
+        "sculpt",
+        "uv",
+        "materials",
+        "hair",
+        "rig_body",
+        "lighting",
+        "render",
+        "qa"
+      ]
+    },
+    "hard_surface_prop": {
+      "label": "Hard-surface prop",
+      "signals": {
+        "prop": 2,
+        "crate": 3,
+        "box": 1,
+        "weapon": 3,
+        "gun": 3,
+        "sword": 2,
+        "vehicle": 3,
+        "car": 2,
+        "robot": 2,
+        "gadget": 3,
+        "device": 2,
+        "furniture": 2,
+        "chair": 2,
+        "table": 1,
+        "barrel": 3,
+        "bevel": 3,
+        "panel lines": 3,
+        "panel": 1,
+        "hard-surface": 4,
+        "hard surface": 4,
+        "mechanical": 3,
+        "sci-fi": 2,
+        "machine": 2,
+        "lamp": 1,
+        "drone": 3,
+        "helmet": 2
+      },
+      "roles": [
+        "blockout",
+        "model",
+        "uv",
+        "materials",
+        "lighting",
+        "render",
+        "qa"
+      ]
+    },
+    "product_shot": {
+      "label": "Product / ad shot",
+      "signals": {
+        "product": 3,
+        "packshot": 4,
+        "pack shot": 4,
+        "logo": 2,
+        "brand": 2,
+        "commercial": 3,
+        "advert": 3,
+        "ad": 1,
+        "turntable": 3,
+        "reveal": 2,
+        "studio": 2,
+        "bottle": 2,
+        "perfume": 3,
+        "watch": 2,
+        "headphones": 2,
+        "sneaker": 2,
+        "can": 1,
+        "showcase": 3,
+        "e-commerce": 3,
+        "hero shot": 2,
+        "cosmetic": 3,
+        "skincare": 3
+      },
+      "roles": [
+        "blockout",
+        "model",
+        "materials",
+        "product",
+        "render",
+        "qa"
+      ]
+    },
+    "environment": {
+      "label": "Environment / scene",
+      "signals": {
+        "environment": 3,
+        "landscape": 3,
+        "street": 3,
+        "city": 3,
+        "town": 2,
+        "forest": 3,
+        "village": 3,
+        "terrain": 3,
+        "set": 1,
+        "layout": 2,
+        "alley": 3,
+        "canyon": 3,
+        "island": 2,
+        "diorama": 2,
+        "ruins": 2,
+        "exterior": 2
+      },
+      "roles": [
+        "blockout",
+        "environment",
+        "model",
+        "materials",
+        "lighting",
+        "render",
+        "qa"
+      ]
+    },
+    "interior": {
+      "label": "Architecture / interior",
+      "signals": {
+        "room": 3,
+        "interior": 4,
+        "bedroom": 4,
+        "kitchen": 4,
+        "living room": 4,
+        "bathroom": 4,
+        "office": 2,
+        "house": 2,
+        "apartment": 3,
+        "floor plan": 4,
+        "archviz": 4,
+        "architecture": 3,
+        "hallway": 3,
+        "studio apartment": 4,
+        "window": 1,
+        "desk": 1,
+        "bed": 1,
+        "cosy": 1,
+        "cozy": 1
+      },
+      "roles": [
+        "blockout",
+        "model",
+        "materials",
+        "lighting",
+        "render",
+        "qa"
+      ]
+    },
+    "procedural": {
+      "label": "Procedural / geometry-nodes system",
+      "signals": {
+        "procedural": 4,
+        "generator": 3,
+        "parametric": 4,
+        "scatter": 3,
+        "geometry nodes": 5,
+        "node system": 3,
+        "randomize": 2,
+        "randomise": 2,
+        "instances": 2,
+        "variations": 2
+      },
+      "roles": [
+        "blockout",
+        "procedural",
+        "materials",
+        "lighting",
+        "render",
+        "qa"
+      ]
+    },
+    "vfx_sim": {
+      "label": "VFX / simulation",
+      "signals": {
+        "explode": 3,
+        "explosion": 3,
+        "smoke": 3,
+        "fire": 3,
+        "liquid": 3,
+        "fluid": 3,
+        "water splash": 3,
+        "splash": 2,
+        "cloth": 3,
+        "crumble": 3,
+        "shatter": 3,
+        "destruction": 3,
+        "particles": 3,
+        "simulation": 4,
+        "sim": 3,
+        "rigid body": 4,
+        "soft body": 4,
+        "pour": 2
+      },
+      "roles": [
+        "blockout",
+        "model",
+        "simulation",
+        "materials",
+        "lighting",
+        "render",
+        "qa"
+      ]
+    },
+    "motion_graphics": {
+      "label": "Motion graphics / animation",
+      "signals": {
+        "animate": 3,
+        "animation": 3,
+        "animated": 3,
+        "loop": 2,
+        "looping": 2,
+        "logo sting": 4,
+        "sting": 2,
+        "keyframes": 3,
+        "keyframe": 3,
+        "camera move": 3,
+        "fly-through": 3,
+        "flythrough": 3,
+        "motion graphics": 4,
+        "intro": 1,
+        "spinning": 2,
+        "orbit": 2
+      },
+      "roles": [
+        "blockout",
+        "model",
+        "materials",
+        "animation",
+        "lighting",
+        "render",
+        "edit",
+        "qa"
+      ]
+    },
+    "stylized": {
+      "label": "Stylised / NPR",
+      "signals": {
+        "toon": 4,
+        "anime": 4,
+        "cel": 4,
+        "cel-shaded": 4,
+        "painterly": 4,
+        "outline": 3,
+        "outlines": 3,
+        "comic": 3,
+        "2d look": 4,
+        "stylised": 3,
+        "stylized": 3,
+        "cartoon": 3,
+        "ink": 2,
+        "watercolor": 3,
+        "watercolour": 3
+      },
+      "roles": [
+        "blockout",
+        "model",
+        "materials",
+        "npr",
+        "lighting",
+        "render",
+        "qa"
+      ]
+    },
+    "game_asset": {
+      "label": "Game asset",
+      "signals": {
+        "game": 3,
+        "game-ready": 5,
+        "game ready": 5,
+        "low-poly": 4,
+        "low poly": 4,
+        "lowpoly": 4,
+        "lod": 4,
+        "unreal": 4,
+        "ue5": 5,
+        "unity": 4,
+        "godot": 4,
+        "tris": 3,
+        "triangle budget": 4,
+        "polycount": 3,
+        "fbx": 3,
+        "gltf": 3,
+        "glb": 3,
+        "real-time": 2,
+        "realtime": 2
+      },
+      "roles": [
+        "blockout",
+        "model",
+        "retopo",
+        "uv",
+        "bake",
+        "materials",
+        "lighting",
+        "render",
+        "qa",
+        "export"
+      ]
+    },
+    "rigging": {
+      "label": "Rigging only",
+      "signals": {
+        "rig this": 5,
+        "rig": 3,
+        "rigging": 4,
+        "weights": 3,
+        "weight paint": 4,
+        "skinning": 4,
+        "ik": 3,
+        "fk": 3,
+        "shape keys": 4,
+        "blendshapes": 4,
+        "armature": 4,
+        "bones": 2,
+        "controls": 1
+      },
+      "roles": [
+        "rig_body",
+        "rig_face",
+        "qa",
+        "export"
+      ]
+    },
+    "lookdev": {
+      "label": "Look-dev / render only",
+      "signals": {
+        "make it look good": 5,
+        "look-dev": 4,
+        "lookdev": 4,
+        "lighting": 2,
+        "render settings": 4,
+        "improve the render": 4,
+        "existing .blend": 4,
+        "existing scene": 3,
+        "my scene": 2,
+        "relight": 4,
+        "noisy": 2,
+        "grade": 2
+      },
+      "roles": [
+        "lighting",
+        "materials",
+        "render",
+        "qa"
+      ]
+    },
+    "scripting": {
+      "label": "Scripting / automation",
+      "signals": {
+        "script": 4,
+        "python": 4,
+        "batch": 4,
+        "add-on": 4,
+        "addon": 4,
+        "operator": 4,
+        "pipeline": 3,
+        "automate": 4,
+        "automation": 4,
+        "bpy": 5,
+        "headless": 3,
+        "rename all": 3
+      },
+      "roles": [
+        "script",
+        "qa"
+      ]
+    },
+    "grease_pencil_2d": {
+      "label": "2D / Grease Pencil",
+      "signals": {
+        "grease pencil": 5,
+        "storyboard": 4,
+        "2d animation": 5,
+        "drawing": 2,
+        "sketch": 2,
+        "hand-drawn": 3,
+        "line drawing": 3,
+        "animatic": 3
+      },
+      "roles": [
+        "gp2d",
+        "render",
+        "qa"
+      ]
+    }
+  },
+  "role_dependencies": {
+    "blockout": [],
+    "environment": [
+      "blockout"
+    ],
+    "procedural": [
+      "blockout",
+      "environment",
+      "model"
+    ],
+    "model": [
+      "blockout",
+      "environment"
+    ],
+    "sculpt": [
+      "model"
+    ],
+    "retopo": [
+      "sculpt",
+      "model"
+    ],
+    "uv": [
+      "retopo",
+      "model"
+    ],
+    "bake": [
+      "uv"
+    ],
+    "materials": [
+      "bake",
+      "uv",
+      "model",
+      "procedural"
+    ],
+    "npr": [
+      "materials"
+    ],
+    "hair": [
+      "materials"
+    ],
+    "rig_face": [
+      "uv",
+      "model"
+    ],
+    "rig_body": [
+      "rig_face",
+      "model",
+      "hair"
+    ],
+    "simulation": [
+      "model"
+    ],
+    "animation": [
+      "model",
+      "rig_body"
+    ],
+    "lighting": [
+      "model",
+      "environment",
+      "procedural"
+    ],
+    "product": [
+      "model",
+      "materials",
+      "lighting"
+    ],
+    "render": [
+      "materials",
+      "npr",
+      "hair",
+      "lighting",
+      "animation",
+      "simulation",
+      "product"
+    ],
+    "edit": [
+      "render"
+    ],
+    "script": [],
+    "gp2d": [],
+    "qa": [
+      "render",
+      "edit",
+      "script",
+      "rig_body",
+      "rig_face"
+    ],
+    "export": [
+      "qa"
+    ]
+  },
+  "modifier_roles": {
+    "game_asset": [
+      "uv",
+      "export"
+    ],
+    "stylized": [
+      "npr"
+    ],
+    "motion_graphics": [
+      "animation"
+    ],
+    "vfx_sim": [
+      "simulation"
+    ],
+    "creature": [
+      "hair"
+    ],
+    "rigging": [
+      "rig_body"
+    ],
+    "procedural": [
+      "procedural"
+    ]
+  }
+}
